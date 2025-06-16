@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Pet Grooming</title>
+    <link rel="stylesheet" href="/estilos/index.css">
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+<header class="menu">
+  <nav>
+    <a href="#home"><i class="fa fa-home"></i> Home</a>
+    <a href="#services"><i class="fa fa-paw"></i> Servicios</a>
+    <a href="#shop"><i class="fa fa-store"></i> Tienda</a>
+    <a href="#coverage"><i class="fa fa-map-marker-alt"></i> Cobertura</a>
+    <a href="#contact"><i class="fa fa-envelope"></i> Contacto</a>
+    <button class="cta">Reservar</button>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=800&q=80" alt="Perro feliz" class="hero-img">
+  <h1>Mobile Pet Grooming</h1>
+  <p>Calidad y conveniencia en cada servicio.</p>
+  <button class="btn-principal">Reservar ahora</button>
+</section>
+
+<section id="services" class="servicios">
+  <h2><i class="fa fa-scissors"></i> Servicios</h2>
+  <div class="acordeon">
+    <div class="item">
+      <button class="titulo"><i class="fa fa-bath"></i> Baño Premium</button>
+      <div class="contenido">
+        <p>Shampoo especializado, secado suave y colonia.</p>
+        <button class="btn-pago" onclick="agregarAlCarrito('Baño Premium', 2000)">Agregar al carrito ($20)</button>
+        <span class="pago-msg"></span>
+      </div>
+    </div>
+    <div class="item">
+      <button class="titulo"><i class="fa fa-brush"></i> Cepillado</button>
+      <div class="contenido">
+        <p>Eliminación de pelo muerto, nudos y suciedad.</p>
+        <button class="btn-pago" onclick="agregarAlCarrito('Cepillado', 1500)">Agregar al carrito ($15)</button>
+        <span class="pago-msg"></span>
+      </div>
+    </div>
+    <div class="item">
+      <button class="titulo"><i class="fa fa-tooth"></i> Dental Cleaning</button>
+      <div class="contenido">
+        <p>Limpieza bucal segura y sin dolor.</p>
+        <button class="btn-pago" onclick="agregarAlCarrito('Dental Cleaning', 1800)">Agregar al carrito ($18)</button>
+        <span class="pago-msg"></span>
+      </div>
+    </div>
+    <!-- Puedes añadir más servicios aquí -->
+  </div>
+</section>
+
+<!-- Carrito flotante -->
+<div id="carrito" class="carrito-flotante">
+  <button class="cerrar-carrito" onclick="document.getElementById('carrito').style.display='none'">&times;</button>
+  <h3><i class="fa fa-shopping-cart"></i> Carrito</h3>
+  <ul id="carrito-lista"></ul>
+  <div id="carrito-total"></div>
+  <button class="btn-pago" id="btnPagarCarrito" onclick="pagarCarrito()" disabled>Pagar carrito</button>
+</div>
+<button id="abrirCarrito" class="abrir-carrito" onclick="document.getElementById('carrito').style.display='block'">
+  <i class="fa fa-shopping-cart"></i> <span id="carrito-cantidad">0</span>
+</button>
+
+<section id="gallery" class="galeria">
+  <h2><i class="fa fa-images"></i> Antes y Después</h2>
+  <div class="grid">
+    <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=400&q=80" alt="Antes">
+    <img src="https://images.unsplash.com/photo-1518715308788-3005759c61d3?auto=format&fit=crop&w=400&q=80" alt="Después">
+    <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80" alt="Antes">
+    <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=400&q=80" alt="Después">
+  </div>
+</section>
+
+<section id="testimonials" class="testimonios">
+  <h2><i class="fa fa-star"></i> Testimonios</h2>
+  <div class="testimony">
+    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Mari Salazar" class="avatar">
+    <p>"Servicio excelente, mi mascota quedó hermosa y feliz."</p><strong>— Mari Salazar</strong>
+  </div>
+  <div class="testimony">
+    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Carolina Angel Pradilla" class="avatar">
+    <p>"Great service! Puntuales y muy profesionales."</p><strong>— Carolina Angel Pradilla</strong>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2><i class="fa fa-phone"></i> Contacto</h2>
+  <p>📞 <a href="tel:7866906500">786‑690‑6500</a></p>
+  <form>
+    <input placeholder="Tipo de servicio" required>
+    <input type="text" placeholder="Nombre" required>
+    <input type="email" placeholder="Correo electrónico" required>
+    <button type="submit"><i class="fa fa-paper-plane"></i> Enviar</button>
+  </form>
+  <p>Horario: Lun–Dom 8 A.M–6 P.M</p>
+  <div class="redes">
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-whatsapp"></i></a>
+  </div>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  // Cambia esto por tu clave pública de Stripe de pruebas
+  const STRIPE_PUBLIC_KEY = 'pk_test_xxx'; // <-- pon aquí tu clave real de pruebas
+  let stripe = null;
+  if (STRIPE_PUBLIC_KEY && STRIPE_PUBLIC_KEY.startsWith('pk_test_')) {
+    stripe = Stripe(STRIPE_PUBLIC_KEY);
+  }
+
+  // Carrito de compras
+  let carrito = [];
+
+  function agregarAlCarrito(nombre, precio) {
+    carrito.push({ nombre, precio });
+    actualizarCarrito();
+    document.getElementById('carrito').style.display = 'block';
+  }
+
+  function eliminarDelCarrito(idx) {
+    carrito.splice(idx, 1);
+    actualizarCarrito();
+  }
+
+  function actualizarCarrito() {
+    const lista = document.getElementById('carrito-lista');
+    const totalDiv = document.getElementById('carrito-total');
+    const cantidad = document.getElementById('carrito-cantidad');
+    lista.innerHTML = '';
+    let total = 0;
+    carrito.forEach((item, idx) => {
+      total += item.precio;
+      const li = document.createElement('li');
+      li.innerHTML = `${item.nombre} <b>$${(item.precio/100).toFixed(2)}</b> <button onclick="eliminarDelCarrito(${idx})" class="eliminar-item">Eliminar</button>`;
+      lista.appendChild(li);
+    });
+    totalDiv.innerHTML = `<strong>Total: $${(total/100).toFixed(2)}</strong>`;
+    cantidad.textContent = carrito.length;
+    document.getElementById('btnPagarCarrito').disabled = carrito.length === 0;
+  }
+
+  function pagarCarrito() {
+    const btn = document.getElementById('btnPagarCarrito');
+    btn.disabled = true;
+    btn.textContent = 'Procesando...';
+    const msg = document.getElementById('carrito-total');
+    msg.textContent = '';
+    if (!stripe) {
+      msg.textContent = 'Configura tu clave pública de Stripe en el código.';
+      btn.disabled = false;
+      btn.textContent = 'Pagar carrito';
+      return;
+    }
+    // Agrupa los servicios iguales
+    const items = [];
+    carrito.forEach(serv => {
+      const found = items.find(i => i.nombre === serv.nombre && i.precio === serv.precio);
+      if (found) {
+        found.cantidad += 1;
+      } else {
+        items.push({ nombre: serv.nombre, precio: serv.precio, cantidad: 1 });
+      }
+    });
+    fetch('http://localhost:4242/crear-sesion-pago', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.sessionId) {
+          carrito = [];
+          actualizarCarrito();
+          return stripe.redirectToCheckout({ sessionId: data.sessionId });
+        } else {
+          throw new Error(data.error || 'No se pudo crear la sesión de pago');
+        }
+      })
+      .then(function (result) {
+        if (result && result.error) {
+          msg.textContent = result.error.message;
+        }
+      })
+      .catch(function (error) {
+        msg.textContent = 'Error al iniciar el pago: ' + error.message;
+        btn.disabled = false;
+        btn.textContent = 'Pagar carrito';
+      });
+  }
+
+  // Inicializa el carrito al cargar
+  actualizarCarrito();
+</script>
+</body>
+</html>
